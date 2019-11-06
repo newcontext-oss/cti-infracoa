@@ -45,7 +45,7 @@
         },
         {
             "created": "2016-05-09T08:17:27.000Z",
-            "id": "relationship--7aebe2f0-28d6-48a2-9c3e-b0aaa60266ef",
+            "id": "relationship--993fc416-1c2d-4ddd-ba4c-0e7979ccf19f",
             "modified": "2016-05-09T08:17:27.000Z",
             "relationship_type": "consists-of",
             "source_ref": "infrastructure--38c47d93-d984-4fd9-b87b-d69d0841628d",
@@ -66,5 +66,6 @@
             "value": "198.52.200.4"
         }
     ],
-    "type": "bundle"
+    "type": "bundle",
+    "id": "bundle--dd5cfbcb-456d-40bc-b68e-d6986cae62f8"
 }
