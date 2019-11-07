@@ -1,4 +1,5 @@
 *.pyc
 *.bak
 .coverage
-p	# virtualenv environment
+# virtualenv environment
+p
