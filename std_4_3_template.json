@@ -1,7 +1,7 @@
 {
     "objects": [
         {
-            "action_type": "programatic:application/x-python-code",
+            "action_type": "programmatic:application/x-python-code",
             "created": "2019-11-01T11:22:30.000Z",
             "id": "course-of-action--8d051c38-97dd-465f-9659-18ed8617ebef",
             "modified": "2019-11-01T11:22:30.000Z",

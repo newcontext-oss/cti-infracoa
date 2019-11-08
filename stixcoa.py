@@ -21,10 +21,15 @@ def fetchcode(coaobj):
 	return coaobj.action_bin.decode('base64')
 
 def runcoa(coaobj):
-	code = fetchcode(coaobj)
+	acttype = coaobj.action_type
 
-	vars = {}
-	exec(code, vars)
+	if acttype == 'programmatic:application/x-python-code':
+		code = fetchcode(coaobj)
+
+		vars = {}
+		exec(code, vars)
+	else:
+		raise ValueError('cannot handle action type: %s' % `acttype`)
 
 class Tests(unittest.TestCase):
 	def setUp(self):
@@ -72,3 +77,9 @@ class Tests(unittest.TestCase):
 			sys.stdout = origstdout
 
 		self.assertEqual(newout.getvalue(), 'this is a test\n')
+
+		# that a bad type
+		coaobj = coaobj.new_version(action_type='bogus:mime-type')
+
+		# raises an exception
+		self.assertRaises(ValueError, runcoa, coaobj)
