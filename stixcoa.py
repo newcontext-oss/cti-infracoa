@@ -4,16 +4,27 @@
 from stix2.v21 import CustomObject, CourseOfAction
 from stix2.v21.bundle import Bundle
 from stix2 import parse, properties
+from StringIO import StringIO
 
 import json
 import os.path
 import shutil
+import sys
 import tempfile
 import unittest
 
 __copyright__ = 'Copyright 2019 New Context Services, Inc.'
 __maintainer__ = 'John-Mark Gurney'
 __email__ = 'jmg@newcontext.com'
+
+def fetchcode(coaobj):
+	return coaobj.action_bin.decode('base64')
+
+def runcoa(coaobj):
+	code = fetchcode(coaobj)
+
+	vars = {}
+	exec(code, vars)
 
 class Tests(unittest.TestCase):
 	def setUp(self):
@@ -50,4 +61,14 @@ class Tests(unittest.TestCase):
 		coaobj = bundle.objects[0]
 		self.assertEqual(coacode, coaobj.action_bin.decode('base64'))
 
-		runcoa(coaobj)
+		self.assertEqual(coacode, fetchcode(coaobj))
+
+		origstdout = sys.stdout
+		newout = StringIO()
+		try:
+			sys.stdout = newout
+			runcoa(coaobj)
+		finally:
+			sys.stdout = origstdout
+
+		self.assertEqual(newout.getvalue(), 'this is a test\n')
